@@ -17,7 +17,7 @@ module.exports = function(grunt) {
                     }
                 },
                 src:libs.concat(srcPath),
-                dest: 'dist/js/main.js'
+                dest: 'dist/js/printjs.js'
             }
         },
         jshint: {
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: { 
-                'dist/js/main.min.js': libs.concat(srcPath)
+                'dist/js/printjs.min.js': libs.concat(srcPath)
                 }
             }
         },
