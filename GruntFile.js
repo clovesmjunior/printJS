@@ -1,8 +1,8 @@
 module.exports = function(grunt) {
     var srcPath         = ["js/**/*.js"];
     var libs            = [ 
-        "bower_components/jspdf/dist/jspdf.min.js", 
-        "bower_components/jquery/dist/jquery.js", 
+        //"bower_components/jspdf/dist/jspdf.min.js", 
+        //"bower_components/jquery/dist/jquery.js", 
     ];    
     var specsPath       = 'specs/**/*spec*.js';
     var helperPath      = 'specs/helpers/*.js';
@@ -43,8 +43,8 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-                mangle: false,
-                compress: false,
+                mangle: true,
+                compress: true,
                 report : 'min',
                 // the banner is inserted at the top of the output
                 banner: '/*! <%= grunt.template.today("dd-mm-yyyy") %> */\n'

@@ -96,7 +96,7 @@ var printJS = function(options){
 		_optConfig.pageFooter = {};
 		_optConfig.pageFooter.title = (options.pageFooter && options.pageFooter.title)?options.pageFooter.title:null;
 		_optConfig.pageFooter.numberPage = (options.pageFooter && options.pageFooter.numberPage)?options.pageFooter.numberPage:null;
-		if(_optConfig.pageFooter.numberPage!=null){
+		if(_optConfig.pageFooter.numberPage!==null){
 			_optConfig.pageFooter.numberPage.mask = (options.pageFooter && options.pageFooter.numberPage.mask)?options.pageFooter.numberPage.mask:"#currentDate - Page #currentPage of #totalPages";	
 			_optConfig.pageFooter.numberPage.positionHorizontal = (options.pageFooter && options.pageFooter.numberPage.positionHorizontal)?options.pageFooter.numberPage.positionHorizontal:"left";	
 			_optConfig.pageFooter.numberPage.numSpacePos = (options.pageFooter && options.pageFooter.numberPage.numSpacePos)?options.pageFooter.numberPage.numSpacePos:120;	
@@ -131,25 +131,25 @@ var printJS = function(options){
     				overflow: 'linebreak',  // visible, hidden, ellipsize or linebreak
     				lineWidth: 0.1,
     				lineColor: [192,192,192]};
-	}
+	};
 
 	this.showOptions = function(){
 		return _optConfig;
-	}
+	};
 
 	this.exportPDF = function(modePrint){
 		_optConfig.modePrint = (modePrint)?modePrint:'text';
 		var printPDFObj = printPDF(_optConfig);		
 		printPDFObj.genPDF(_contentValue);
 
-	}
+	};
 
 	this.setContent = function(data){
 		_contentValue = data;
 		_isHTML = false;
 		_isJSON = false;
 		return self;
-	}
+	};
 
 
 	this.setContentHTML = function(data){
@@ -157,14 +157,14 @@ var printJS = function(options){
 		_isHTML = true;
 		_isJSON = false;
 		return self;
-	}
+	};
 
 	this.setContentJSON = function(data){
 		_contentValue = data;
 		_isHTML = false;
 		_isJSON = false;
 		return self;
-	}
+	};
 	
 		
 	this._init();
@@ -178,11 +178,11 @@ var printPDF = function(options){
 		var doc = new jsPDF(options.orientation,options.unit, nameReport);
 		doc.text(20, 20, 'Hello world.');
 		doc.save(options.nameReport+'.pdf');	
-	}
+	};
 
 	this.getJsonByTableHTML = function(doc, obj){
 		return doc.autoTableHtmlToJson(obj);    	
-	}
+	};
 
 	this.createTablePDF = function(doc, res, isByTable){
 		var defOpt = {
@@ -207,7 +207,7 @@ var printPDF = function(options){
 		}
 		doc.autoTable((isByTable)? res.columns :options.configColumns.columns, (isByTable)? res.data :res, defOpt);
 		return doc;
-	}
+	};
 
 	this.genPDF = function(data){
 		var doc = new jsPDF('p', options.unit);
@@ -243,7 +243,7 @@ var printPDF = function(options){
 	};
 
 	this.genNumberPagesPDF=function(data, doc){
-		if(options.pageFooter!=null && options.pageFooter.numberPage!=null){
+		if(options.pageFooter!==null && options.pageFooter.numberPage!==null){
 			var numberPageObj = options.pageFooter.numberPage;
 			var strReplaced = numberPageObj.mask.replace("#currentDate", (moment().format(options.dateConfig.mask))).replace("#currentPage", data.pageCount);
 	        // Total page number plugin only available in jspdf v1.0+
@@ -269,4 +269,4 @@ var printPDF = function(options){
 	    }
 	};
 	return this;
-}
+};
