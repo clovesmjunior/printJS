@@ -115,14 +115,14 @@ var printJS = function(options){
 		_optConfig.configColumns = {};
 		_optConfig.configColumns.columns = (options.configColumns && options.configColumns.columns)?options.configColumns.columns:[];
 		_optConfig.configColumns.columnStyles = (options.configColumns && options.configColumns.columnStyles)?options.configColumns.columnStyles:{id: {fillColor: 0}};		
-		_optConfig.configColumns.headerStyles =  (options.configColumns.headerStyles)?options.configColumns.headerStyles:{
+		_optConfig.configColumns.headerStyles =  (options.configColumns && options.configColumns.headerStyles)?options.configColumns.headerStyles:{
 					fillColor: [70,130,180],
 					fontSize: 8,
             		rowHeight: 17,
             		halign: 'center', // left, center, right
     				valign: 'middle', // top, middle, bottom
 				};
-		_optConfig.configColumns.bodyStyles =  (options.configColumns.bodyStyles)?options.configColumns.bodyStyles:{
+		_optConfig.configColumns.bodyStyles =  (options.configColumns && options.configColumns.bodyStyles)?options.configColumns.bodyStyles:{
 					fillColor: [255, 255, 255],
 					fontSize: 8,
 					rowHeight: 17,

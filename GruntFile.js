@@ -1,7 +1,9 @@
 module.exports = function(grunt) {
     var srcPath         = ["js/**/*.js"];
     var libs            = [ 
-        //"bower_components/jspdf/dist/jspdf.min.js", 
+        "bower_components/jspdf/dist/jspdf.min.js", 
+        "bower_components/jspdf-autotable/dist/jspdf.plugin.autotable.js", 
+        "bower_components/moment/min/moment-with-locales.min.js", 
         //"bower_components/jquery/dist/jquery.js", 
     ];    
     var specsPath       = 'specs/**/*spec*.js';

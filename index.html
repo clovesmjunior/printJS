@@ -150,22 +150,25 @@
 	  				mask:"#currentDate - Página #currentPage de #totalPages",
 	  			}
 	  		}
-	  	}).setContent(array).exportPDF("table");
+	  	})
+	  	//.setContent(array).exportPDF("table");
 	  	console.log(document.getElementById('tbl1'));
 
-	  	/*window.onload=function(){
+	  	window.onload=function(){
 	  	printJS({
 	  		pageHeader:{
-	  			manualConfigPDF: function(doc, data){
-	  				doc.setFontSize(20);
-			        doc.setTextColor(40);
-			        doc.setFontStyle('normal');
-			        //doc.addImage(headerImgData, 'JPEG', data.settings.margin.left, 40, 25, 25);
-			        doc.text("Report", data.settings.margin.left + 35, 60);
+	  			isDefaultHeader: true,
+	  			posCenter: true,
+	  			title: "Example Report of Table"
+	  		},
+	  		pageFooter: {
+	  			numberPage:{
+	  				positionHorizontal: 'left',
+	  				mask:"PrintJS example footer - #currentDate - Page #currentPage of #totalPages",
 	  			}
 	  		}
 	  	}).setContentHTML(document.getElementById('tbl1')).exportPDF('html'); 	
-	  	}*/
+	  	}
 	  	
 	  	//printJS().setContentHTML('<div>teste</div>').exportPDF();
 	  </script>
