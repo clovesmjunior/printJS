@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+	  <title>Test</title>
+	  <meta property="og:title" content="Test" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <script type="text/javascript" src="bower_components/jspdf/dist/jspdf.min.js"></script>
+	  <script type="text/javascript" src="bower_components/jspdf-autotable/dist/jspdf.plugin.autotable.js"></script>
+	  <script type="text/javascript" src="bower_components/moment/min/moment-with-locales.min.js"></script>
+	  
+	  <script type="text/javascript" src="js/printjs-core.js"></script>
+	  <script type="text/javascript">
+	  	var array = [	
+	  					{col1:"**",col2:"Loudi Teste Teste TEste Loudi Teste Teste TEste Loudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEsteLoudi Teste Teste TEste ASDF ",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+	  					{col1:"**",col2:"Loudi",col3:"Brazil", col4: "X"},
+	  					{col1:"**1",col2:"Maria",col3:"EUA", col4: "-"},
+  					];
+			
+
+	  	printJS({
+	  		configColumns:{
+	  			columns: [
+				    {title: "ID", dataKey: "col1"},
+				    {title: "Name", dataKey: "col2"}, 
+				    {title: "Country", dataKey: "col3"},
+				    {title: "Open", dataKey: "col4"},
+				],
+				styles:{
+					fillColor: [100, 0, 0]
+				}
+	  		},
+	  		defaultFontSize: 6,
+	  		pageHeader:{
+	  			isDefaultHeader: true,
+	  			title: "Example Report"
+	  		},
+	  		pageFooter: {
+	  			numberPage:{
+	  				positionHorizontal: 'right',
+	  				mask:"#currentDate - Página #currentPage de #totalPages",
+	  			}
+	  		}
+	  	}).setContent(array).exportPDF("table");
+	  	console.log(document.getElementById('tbl1'));
+
+	  	/*window.onload=function(){
+	  	printJS({
+	  		pageHeader:{
+	  			manualConfigPDF: function(doc, data){
+	  				doc.setFontSize(20);
+			        doc.setTextColor(40);
+			        doc.setFontStyle('normal');
+			        //doc.addImage(headerImgData, 'JPEG', data.settings.margin.left, 40, 25, 25);
+			        doc.text("Report", data.settings.margin.left + 35, 60);
+	  			}
+	  		}
+	  	}).setContentHTML(document.getElementById('tbl1')).exportPDF('html'); 	
+	  	}*/
+	  	
+	  	//printJS().setContentHTML('<div>teste</div>').exportPDF();
+	  </script>
+  	</head>
+  	<body>
+  		<table id="tbl1">
+  			<tr>
+  				<th>ID</th>
+  				<th>Name</th>
+  				<th>Country</th>
+  			</tr>
+  			<tr>
+  				<td>1</td>
+  				<td>Teste 1</td>
+  				<td>EUA</td>
+  			</tr>
+  			<tr>
+  				<td>2</td>
+  				<td>Teste 2</td>
+  				<td>Brazil</td>
+  			</tr>
+  			<tr>
+  				<td>3</td>
+  				<td>Teste 3</td>
+  				<td>France</td>
+  			</tr>
+  			<tr>
+  				<td>4</td>
+  				<td>Teste 4</td>
+  				<td>Japan</td>
+  			</tr>
+  		</table>
+  	</body>
+</html>
