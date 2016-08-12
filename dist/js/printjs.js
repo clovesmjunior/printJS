@@ -1013,30 +1013,83 @@ var printJS = function(options){
 	var _contentValue = null;
 	var _isHTML = false;
 	var _isJSON = false;
+	var _arrayPrints = [];
 
 	if(!options){
 		options = {};
 	}
-	this._init=function(){
-		//config properties of generator file
-		_optConfig.dateConfig = (options.dateConfig)?options.dateConfig:{
+	var _init=function(){
+		_optConfig = _optionUtils(options);
+	};
+
+	this.addPrintChild = function(optionsChild){		
+		return _arrayPrints.push(_optionUtils(optionsChild));
+	};
+
+	this.changeContentChild = function(pos, data){		
+		_arrayPrints[pos].contentValue = data;
+		return this;
+	};
+
+	this.showOptions = function(){
+		return _optConfig;
+	};
+
+	this.exportPDF = function(modePrint){
+		_optConfig.modePrint = (modePrint)?modePrint:'text';
+		_optConfig.childs = _arrayPrints;
+		var printPDFObj = printPDF(_optConfig);		
+		printPDFObj.genPDF(_contentValue);
+	};
+
+	this.setContent = function(data){
+		_contentValue = data;
+		_isHTML = false;
+		_isJSON = false;
+		return self;
+	};
+
+
+	this.setContentHTML = function(data){
+		_contentValue = data;
+		_isHTML = true;
+		_isJSON = false;
+		return self;
+	};
+
+	this.setContentJSON = function(data){
+		_contentValue = data;
+		_isHTML = false;
+		_isJSON = false;
+		return self;
+	};
+	
+	var _optionUtils = function(options){
+	//config properties of generator file
+		var optConfig = {};
+		optConfig.dateConfig = (options.dateConfig)?options.dateConfig:{
 			mask: 'DD/MM/YYYY'
 		};
-		_optConfig.orientation = (options.orientation)?options.orientation:'l';
-		_optConfig.grid = (options.grid)?options.grid:true;
-		_optConfig.unit = (options.unit)?options.unit:'pt';
-		_optConfig.format = (options.format)?options.format:'a4';
-		_optConfig.tableWidth= (options.tableWidth)?options.tableWidth:'auto';
-		_optConfig.nameReport = (options.nameReport)?options.nameReport:'report';
-		_optConfig.margin = (options.margin)?options.margin:{};
-		_optConfig.margin.top = (options.margin && options.margin.top)?options.margin.top:80;
-		_optConfig.margin.left = (options.margin && options.margin.left)?options.margin.left:40;
-	 	_optConfig.styles =  (options.styles)?options.styles:{fillColor: [255, 255, 255]};
+		optConfig.orientation = (options.orientation)?options.orientation:'l';
+		optConfig.grid = (options.grid)?options.grid:true;
+		
+		optConfig.startY = (options.grid)?options.startY:false;
+		optConfig.startX = (options.grid)?options.startX:false;
+		optConfig.pageBreak = (options.pageBreak)?options.pageBreak:false;
+
+		optConfig.unit = (options.unit)?options.unit:'pt';
+		optConfig.format = (options.format)?options.format:'a4';
+		optConfig.tableWidth= (options.tableWidth)?options.tableWidth:'auto';
+		optConfig.nameReport = (options.nameReport)?options.nameReport:'report';
+		optConfig.margin = (options.margin)?options.margin:{};
+		optConfig.margin.top = (options.margin && options.margin.top)?options.margin.top:80;
+		optConfig.margin.left = (options.margin && options.margin.left)?options.margin.left:40;
+	 	optConfig.styles =  (options.styles)?options.styles:{fillColor: [255, 255, 255]};
 	 	
 		//config properties of Page Header
-		_optConfig.pageHeader = {};
-		_optConfig.pageHeader.title = (options.pageHeader && options.pageHeader.title)?options.pageHeader.title:null;		
-		_optConfig.pageHeader.manualConfigPDF = function(doc, data){
+		optConfig.pageHeader = {};
+		optConfig.pageHeader.title = (options.pageHeader && options.pageHeader.title)?options.pageHeader.title:null;		
+		optConfig.pageHeader.manualConfigPDF = function(doc, data){
 			if(options.pageHeader){
 				if(options.pageHeader.manualConfigPDF && options.pageHeader.manualConfigPDF)
 				{	
@@ -1072,36 +1125,36 @@ var printJS = function(options){
 		};
 
 		//config properties of Page Footer
-		_optConfig.pageFooter = {};
-		_optConfig.pageFooter.title = (options.pageFooter && options.pageFooter.title)?options.pageFooter.title:null;
-		_optConfig.pageFooter.numberPage = (options.pageFooter && options.pageFooter.numberPage)?options.pageFooter.numberPage:null;
-		if(_optConfig.pageFooter.numberPage!==null){
-			_optConfig.pageFooter.numberPage.mask = (options.pageFooter && options.pageFooter.numberPage.mask)?options.pageFooter.numberPage.mask:"#currentDate - Page #currentPage of #totalPages";	
-			_optConfig.pageFooter.numberPage.positionHorizontal = (options.pageFooter && options.pageFooter.numberPage.positionHorizontal)?options.pageFooter.numberPage.positionHorizontal:"left";	
-			_optConfig.pageFooter.numberPage.numSpacePos = (options.pageFooter && options.pageFooter.numberPage.numSpacePos)?options.pageFooter.numberPage.numSpacePos:120;	
-			_optConfig.pageFooter.numberPage.positionVertical = (options.pageFooter && options.pageFooter.numberPage.positionVertical)?options.pageFooter.numberPage.positionVertical:"bottom";
-			_optConfig.pageFooter.numberPage.positionVerticalPrecision = (options.pageFooter && options.pageFooter.numberPage.positionVerticalPrecision)?options.pageFooter.numberPage.positionVerticalPrecision:(-30);
+		optConfig.pageFooter = {};
+		optConfig.pageFooter.title = (options.pageFooter && options.pageFooter.title)?options.pageFooter.title:null;
+		optConfig.pageFooter.numberPage = (options.pageFooter && options.pageFooter.numberPage)?options.pageFooter.numberPage:null;
+		if(optConfig.pageFooter.numberPage!==null){
+			optConfig.pageFooter.numberPage.mask = (options.pageFooter && options.pageFooter.numberPage.mask)?options.pageFooter.numberPage.mask:"#currentDate - Page #currentPage of #totalPages";	
+			optConfig.pageFooter.numberPage.positionHorizontal = (options.pageFooter && options.pageFooter.numberPage.positionHorizontal)?options.pageFooter.numberPage.positionHorizontal:"left";	
+			optConfig.pageFooter.numberPage.numSpacePos = (options.pageFooter && options.pageFooter.numberPage.numSpacePos)?options.pageFooter.numberPage.numSpacePos:120;	
+			optConfig.pageFooter.numberPage.positionVertical = (options.pageFooter && options.pageFooter.numberPage.positionVertical)?options.pageFooter.numberPage.positionVertical:"bottom";
+			optConfig.pageFooter.numberPage.positionVerticalPrecision = (options.pageFooter && options.pageFooter.numberPage.positionVerticalPrecision)?options.pageFooter.numberPage.positionVerticalPrecision:(-30);
 		}		
 
 		//config properties of file
-		_optConfig.properties = {};
-		_optConfig.properties.title = (options.properties && options.properties.title)?options.properties.title:"-";
-		_optConfig.properties.subject = (options.properties && options.properties.subject)?options.properties.subject:"-";
-		_optConfig.properties.author = (options.properties && options.properties.author)?options.properties.author:"printJS";
-		_optConfig.properties.keywords = (options.properties && options.properties.keywords)?options.properties.keywords:"";
-		_optConfig.properties.subject = (options.properties && options.properties.creator)?options.properties.creator:"-";
+		optConfig.properties = {};
+		optConfig.properties.title = (options.properties && options.properties.title)?options.properties.title:"-";
+		optConfig.properties.subject = (options.properties && options.properties.subject)?options.properties.subject:"-";
+		optConfig.properties.author = (options.properties && options.properties.author)?options.properties.author:"printJS";
+		optConfig.properties.keywords = (options.properties && options.properties.keywords)?options.properties.keywords:"";
+		optConfig.properties.subject = (options.properties && options.properties.creator)?options.properties.creator:"-";
 		//config properties of column
-		_optConfig.configColumns = {};
-		_optConfig.configColumns.columns = (options.configColumns && options.configColumns.columns)?options.configColumns.columns:[];
-		_optConfig.configColumns.columnStyles = (options.configColumns && options.configColumns.columnStyles)?options.configColumns.columnStyles:{id: {fillColor: 0}};		
-		_optConfig.configColumns.headerStyles =  (options.configColumns && options.configColumns.headerStyles)?options.configColumns.headerStyles:{
+		optConfig.configColumns = {};
+		optConfig.configColumns.columns = (options.configColumns && options.configColumns.columns)?options.configColumns.columns:[];
+		optConfig.configColumns.columnStyles = (options.configColumns && options.configColumns.columnStyles)?options.configColumns.columnStyles:{id: {fillColor: 0}};		
+		optConfig.configColumns.headerStyles =  (options.configColumns && options.configColumns.headerStyles)?options.configColumns.headerStyles:{
 					fillColor: [70,130,180],
 					fontSize: 8,
             		rowHeight: 17,
             		halign: 'center', // left, center, right
     				valign: 'middle', // top, middle, bottom
 				};
-		_optConfig.configColumns.bodyStyles =  (options.configColumns && options.configColumns.bodyStyles)?options.configColumns.bodyStyles:{
+		optConfig.configColumns.bodyStyles =  (options.configColumns && options.configColumns.bodyStyles)?options.configColumns.bodyStyles:{
 					fillColor: [255, 255, 255],
 					fontSize: 8,
 					rowHeight: 17,
@@ -1110,43 +1163,12 @@ var printJS = function(options){
     				overflow: 'linebreak',  // visible, hidden, ellipsize or linebreak
     				lineWidth: 0.1,
     				lineColor: [192,192,192]};
+
+    	optConfig.contentValue = options.contentValue;
+    	return optConfig;
 	};
-
-	this.showOptions = function(){
-		return _optConfig;
-	};
-
-	this.exportPDF = function(modePrint){
-		_optConfig.modePrint = (modePrint)?modePrint:'text';
-		var printPDFObj = printPDF(_optConfig);		
-		printPDFObj.genPDF(_contentValue);
-
-	};
-
-	this.setContent = function(data){
-		_contentValue = data;
-		_isHTML = false;
-		_isJSON = false;
-		return self;
-	};
-
-
-	this.setContentHTML = function(data){
-		_contentValue = data;
-		_isHTML = true;
-		_isJSON = false;
-		return self;
-	};
-
-	this.setContentJSON = function(data){
-		_contentValue = data;
-		_isHTML = false;
-		_isJSON = false;
-		return self;
-	};
-	
 		
-	this._init();
+	_init();
 	return this;
 };
 
@@ -1159,11 +1181,11 @@ var printPDF = function(options){
 		doc.save(options.nameReport+'.pdf');	
 	};
 
-	this.getJsonByTableHTML = function(doc, obj){
+	var _toJsonByTableHTML = function(doc, obj){
 		return doc.autoTableHtmlToJson(obj);    	
 	};
 
-	this.createTablePDF = function(doc, res, isByTable){
+	var _createDefOpt = function(options, doc, isChild){
 		var defOpt = {
 		   	tableWidth: options.tableWidth,
 		    styles: options.styles,
@@ -1184,7 +1206,29 @@ var printPDF = function(options){
 		if(options.grid){
 			defOpt.theme= 'grid';
 		}
+		if(options.startY || isChild){
+			defOpt.startY = ((isChild)?(doc.autoTableEndPosY()+ (options.startY?options.startY:30)):((options.startY?options.startY:0)));
+		}
+		if(options.pageBreak || isChild){
+			defOpt.pageBreak= (options.pageBreak)?options.pageBreak:'avoid';
+		}
+
+		return defOpt;
+	};
+
+	this.createTablePDF = function(doc, res, isByTable){
+		var defOpt = _createDefOpt(options, doc, false);	
+		console.log(options);	
 		doc.autoTable((isByTable)? res.columns :options.configColumns.columns, (isByTable)? res.data :res, defOpt);
+		if(options.childs){
+			var child; 
+			var optChild;
+			for(pos = 0; pos<options.childs.length; pos++){
+				child = options.childs[pos];
+				optChild = _createDefOpt(child, doc, true);
+				doc.autoTable(child.configColumns.columns, child.contentValue, optChild);
+			}
+		}		
 		return doc;
 	};
 
@@ -1209,7 +1253,7 @@ var printPDF = function(options){
 			break;
 
 			case 'html':
-				jsonData = self.getJsonByTableHTML(doc, data);
+				jsonData = self._toJsonByTableHTML(doc, data);
 				doc = self.createTablePDF(doc, jsonData, true);
 			break;
 		}
@@ -1220,11 +1264,14 @@ var printPDF = function(options){
 
 		doc.save(nameReport);
 	};
-
+	var numPage = 1;
 	this.genNumberPagesPDF=function(data, doc){
 		if(options.pageFooter!==null && options.pageFooter.numberPage!==null){
 			var numberPageObj = options.pageFooter.numberPage;
-			var strReplaced = numberPageObj.mask.replace("#currentDate", (moment().format(options.dateConfig.mask))).replace("#currentPage", data.pageCount);
+			var strReplaced = numberPageObj.mask
+			.replace("#currentDate", (moment().format(options.dateConfig.mask)))
+			.replace("#currentPage",numPage);
+			numPage++;
 	        // Total page number plugin only available in jspdf v1.0+
 	        if (typeof doc.putTotalPages === 'function') {
 	    	 	strReplaced = strReplaced.replace("#totalPages",totalPagesExp);
