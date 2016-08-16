@@ -172,6 +172,7 @@
 			
 
 	  	var print = printJS({
+	  		nameReport: 'printReport',
 	  		configColumns:{
 	  			columns: [
 				    {title: "ID", dataKey: "col1"},
@@ -209,9 +210,9 @@
 					fillColor: [100, 0, 0]
 				}
 	  		},
+	  		pageBreak: 'always',
 	  		pageHeader:{
 	  			isDefaultHeader: true,
-	  			isNewHeader: true,
 	  			title: "Example SubReport"
 	  		},
 	  		contentValue: arrayChild1
