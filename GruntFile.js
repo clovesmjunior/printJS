@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                     helpers : helperPath,
                     coverage : {
                         output : 'coverage/',
-                        reportType : 'cobertura',
+                        reportType : 'coverage',
                         excludes : ['lib/**/*.js', 'bower_components/**/*.js']    
                       },
                 }

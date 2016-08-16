@@ -1174,6 +1174,7 @@ var printJS = function(options){
 
 var printPDF = function(options){
 	var self = this;
+	var numPage = 1;
 	var totalPagesExp = "{total_pages_count_string}";
 	this.genTest = function(){
 		var doc = new jsPDF(options.orientation,options.unit, nameReport);
@@ -1197,7 +1198,9 @@ var printPDF = function(options){
 		    	//left: options.margin.left,
 		    },
 		    beforePageContent: function(data) {
-		        options.pageHeader.manualConfigPDF(doc, data);				        
+		    	data.pageCount = numPage;
+		    	options.pageHeader.manualConfigPDF(doc, data);				        
+		        numPage++;
 		    },
 		    afterPageContent: function(data) {
 		    	self.genNumberPagesPDF(data, doc);
@@ -1207,7 +1210,7 @@ var printPDF = function(options){
 			defOpt.theme= 'grid';
 		}
 		if(options.startY || isChild){
-			defOpt.startY = ((isChild)?(doc.autoTableEndPosY()+ (options.startY?options.startY:30)):((options.startY?options.startY:0)));
+			defOpt.startY = ((isChild)?(doc.autoTableEndPosY()+ (options.startY?options.startY:60)):((options.startY?options.startY:0)));
 		}
 		if(options.pageBreak || isChild){
 			defOpt.pageBreak= (options.pageBreak)?options.pageBreak:'avoid';
@@ -1264,14 +1267,14 @@ var printPDF = function(options){
 
 		doc.save(nameReport);
 	};
-	var numPage = 1;
+	
 	this.genNumberPagesPDF=function(data, doc){
 		if(options.pageFooter!==null && options.pageFooter.numberPage!==null){
 			var numberPageObj = options.pageFooter.numberPage;
 			var strReplaced = numberPageObj.mask
 			.replace("#currentDate", (moment().format(options.dateConfig.mask)))
-			.replace("#currentPage",numPage);
-			numPage++;
+			.replace("#currentPage",data.pageCount);
+			
 	        // Total page number plugin only available in jspdf v1.0+
 	        if (typeof doc.putTotalPages === 'function') {
 	    	 	strReplaced = strReplaced.replace("#totalPages",totalPagesExp);
@@ -1280,7 +1283,7 @@ var printPDF = function(options){
 	        var calcPosition = 0;
 	        switch(numberPageObj.positionHorizontal){
 	        	case 'right':
-	        		calcPosition = (doc.internal.pageSize.width - calcSize);
+	        		calcPosition = doc.internal.pageSize.width - calcSize;
 	        	break;
 	        	case 'left':
 	        		calcPosition = data.settings.margin.left;
