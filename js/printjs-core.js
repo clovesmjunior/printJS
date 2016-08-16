@@ -304,7 +304,7 @@ var printPDF = function(options){
 	        var calcPosition = 0;
 	        switch(numberPageObj.positionHorizontal){
 	        	case 'right':
-	        		calcPosition = (doc.internal.pageSize.width - calcSize);
+	        		calcPosition = doc.internal.pageSize.width - calcSize;
 	        	break;
 	        	case 'left':
 	        		calcPosition = data.settings.margin.left;
