@@ -1070,7 +1070,7 @@ var printJS = function(options){
 		optConfig.dateConfig = (options.dateConfig)?options.dateConfig:{
 			mask: 'DD/MM/YYYY'
 		};
-		optConfig.orientation = (options.orientation)?options.orientation:'l';
+		optConfig.orientation = (options.orientation)?options.orientation:'p';
 		optConfig.grid = (options.grid)?options.grid:true;
 		
 		optConfig.startY = (options.grid)?options.startY:false;
@@ -1189,6 +1189,7 @@ var printPDF = function(options){
 	var _createDefOpt = function(options, doc, isChild){
 		var defOpt = {
 		   	tableWidth: options.tableWidth,
+			orientation: options.orientation,
 		    styles: options.styles,
 		    columnStyles: options.configColumns.columnStyles,
 		    headerStyles: options.configColumns.headerStyles,
@@ -1236,7 +1237,7 @@ var printPDF = function(options){
 	};
 
 	this.genPDF = function(data){
-		var doc = new jsPDF('p', options.unit);
+		var doc = new jsPDF(options.orientation, options.unit);
 		var nameReport = options.nameReport+'.pdf';
 		switch(options.modePrint){			
 			case 'text':				
