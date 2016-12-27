@@ -171,8 +171,9 @@
   			];
 			
 
-	  	var print = printJS({
+	  	/*var print = printJS({
 	  		nameReport: 'printReport',
+			orientation: 'p'
 	  		configColumns:{
 	  			columns: [
 				    {title: "ID", dataKey: "col1"},
@@ -219,11 +220,12 @@
 	  	});
 	  	print.exportPDF("table");
 
-
+*/
 	  	//console.log(document.getElementById('tbl1'));
 
-	  	/*window.onload=function(){
+	  	window.onload=function(){
 	  	printJS({
+			orientation: 'l',
 	  		pageHeader:{
 	  			isDefaultHeader: true,
 	  			posCenter: true,
@@ -237,7 +239,7 @@
 	  		}
 	  	})
 	  	.setContentHTML(document.getElementById('tbl1')).exportPDF('html'); 	
-	  	}*/
+	  	}
 	  	
 	  	//printJS().setContentHTML('<div>teste</div>').exportPDF();
 	  </script>
