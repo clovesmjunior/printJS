@@ -1115,8 +1115,8 @@ var printJS = function(options){
 				        		(options.pageHeader.image.w)?options.pageHeader.image.w:25, 
 				        		(options.pageHeader.image.h)?options.pageHeader.image.h:25);		
 				        }
-				        
-				        doc.text(title,xOffset, (options.pageHeader.titleY)?options.pageHeader.titleY:60);					
+				        var endPosY = (options.pageHeader.isNewHeader)?doc.autoTableEndPosY():0;
+				        doc.text(title,xOffset, ((options.pageHeader.titleY)?options.pageHeader.titleY:60)+endPosY);
 					}
 				}
 				
@@ -1182,7 +1182,7 @@ var printPDF = function(options){
 		doc.save(options.nameReport+'.pdf');	
 	};
 
-	var _toJsonByTableHTML = function(doc, obj){
+	this._toJsonByTableHTML = function(doc, obj){
 		return doc.autoTableHtmlToJson(obj);    	
 	};
 

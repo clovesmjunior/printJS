@@ -203,7 +203,7 @@ var printPDF = function(options){
 		doc.save(options.nameReport+'.pdf');	
 	};
 
-	var _toJsonByTableHTML = function(doc, obj){
+	this._toJsonByTableHTML = function(doc, obj){
 		return doc.autoTableHtmlToJson(obj);    	
 	};
 
